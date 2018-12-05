@@ -88,8 +88,9 @@ describe('toFile()', () => {
         g.OriginalFile = File;
         g.File = MockFile;
         const clonedFile = clone(file);
-        g.File = (global as any).OriginalFile;
+        g.File = g.OriginalFile;
 
+        expect(clonedFile).toBeInstanceOf(Blob);
         expect(clonedFile === file).toBe(false);
         expect(clonedFile.name).toEqual(file.name);
         expect(clonedFile.type).toEqual(file.type);
